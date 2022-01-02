@@ -5,6 +5,9 @@ from util import success, error
 
 
 class MailInABoxConnector(AbstractConnector):
+    """
+    Connector for a mail in a box server
+    """
 
     def __init__(self):
         self.instance_url = None
