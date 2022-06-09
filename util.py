@@ -8,7 +8,7 @@ def get_public_ip():
     return data['ip']
 
 
-class bcolors:
+class BgColors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
@@ -21,13 +21,13 @@ class bcolors:
 
 
 def warn(text):
-    print(f"{bcolors.WARNING}{text}{bcolors.ENDC}")
+    print(f"{BgColors.WARNING}{text}{BgColors.ENDC}")
 
 
 def error(text):
-    print(f"{bcolors.FAIL}{text}{bcolors.ENDC}")
+    print(f"{BgColors.FAIL}{text}{BgColors.ENDC}")
 
 
 def success(text):
-    print(f"{bcolors.OKGREEN}{text}{bcolors.ENDC}")
+    print(f"{BgColors.OKGREEN}{text}{BgColors.ENDC}")
 
