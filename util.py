@@ -8,6 +8,13 @@ def get_public_ip():
     return data['ip']
 
 
+def get_public_ipv6():
+    r = requests.get(url="https://api64.ipify.org?format=json")
+    data = r.json()
+
+    return data['ip']
+
+
 class BgColors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
