@@ -4,7 +4,7 @@ from abc import abstractmethod, ABC
 class AbstractConnector(ABC):
 
     @abstractmethod
-    def auth(self, username, password):
+    def auth(self, username: str, password: str):
         """
         Authenticate to the service
         :param username:
@@ -14,11 +14,11 @@ class AbstractConnector(ABC):
         pass
 
     @abstractmethod
-    def set_instance(self, url):
+    def set_instance(self, url: str):
         """Set the instance url"""
         pass
 
     @abstractmethod
-    def update_dns(self, domain, ip):
+    def update_dns(self, domain: str, ip: str):
         """Update the dns ip to the service"""
         pass
