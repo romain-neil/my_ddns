@@ -11,7 +11,7 @@ class RecordType(Enum):
     AAAA = 2
     PTR = 3
     CNAME = 4
-    DNS = 5
+    NS = 5
 
     # Keep last
     DEFAULT = 0
