@@ -50,7 +50,7 @@ class PowerDnsConnector(AbstractConnector):
         record = Record(ip)
 
         r = requests.patch(
-            url="{0}/api/servers/localhost/zones/{1}".format(self.instance_url, self.zone),
+            url=f"{self.instance_url}/api/servers/localhost/zones/{self.zone}",
             headers={"X-API-Key": self.api_key},
             data=build_params(domain, record)
         )
