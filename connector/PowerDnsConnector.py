@@ -44,7 +44,7 @@ class PowerDnsConnector(AbstractConnector):
         pass
 
     def set_instance(self, url):
-        pass
+        self.instance_url = url
 
     def update_dns(self, domain, ip):
         record = Record(ip)
