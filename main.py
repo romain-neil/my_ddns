@@ -38,6 +38,7 @@ def main():
     # Set optionals parameters for powerdns connector
     connector.set_optional_parameter('api_key', api_key)
     connector.set_optional_parameter('zone', zone)
+    connector.set_optional_parameter('user', user)
 
     connector.set_instance(instance_url)
 
