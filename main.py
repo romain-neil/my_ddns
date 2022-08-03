@@ -7,6 +7,19 @@ from connector.PowerDnsConnector import PowerDnsConnector
 from util.text import get_public_ip, get_public_ipv6, info
 
 
+def parse_params() -> dict:
+    parsed_params_list = {}
+
+    for p in sys.argv:
+        if p.startswith('--'):
+            p = p.removeprefix('--')
+            param: list[str] = p.split('=')
+
+            parsed_params_list[param[0]] = param[1]
+
+    return parsed_params_list
+
+
 def main():
     current_ip = ""
     current_ipv6 = ""
