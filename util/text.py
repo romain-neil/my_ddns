@@ -1,3 +1,5 @@
+import ipaddress
+
 import requests
 
 
@@ -6,6 +8,19 @@ def get_public_ip():
     data = r.json()
 
     return data['ip']
+
+
+def get_public_ipv6():
+    r = requests.get(url="https://api64.ipify.org/?format=json")
+    data = r.json()
+    ip = ''
+
+    try:
+        ip = ipaddress.IPv6Address(data['ip'])
+    except ValueError:
+        pass
+
+    return ip
 
 
 class BGColors:
