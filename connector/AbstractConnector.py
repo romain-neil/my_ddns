@@ -25,6 +25,9 @@ class AbstractConnector(ABC):
     def auth(self, username: str, password: str):
         """
         Authenticate to the service
+
+        @deprecated
+
         :param username:
         :param password:
         :return:
@@ -33,7 +36,12 @@ class AbstractConnector(ABC):
 
     @abstractmethod
     def set_instance(self, url: str):
-        """Set the instance url"""
+        """
+        Set the instance url
+
+        @deprecated
+
+        """
         pass
 
     @abstractmethod
