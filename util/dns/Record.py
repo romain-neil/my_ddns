@@ -32,7 +32,16 @@ class Record:
         self.ttl = ttl
         self.content = content
 
-    def is_ip(self):
+    def set_ip_record_type(self):
+        """
+        Set the record type according to what is the content (ipv4, ipv6 or cname)
+        """
+        self.record_type = self.get_record_type()
+
+    def is_ip(self) -> bool:
+        """
+        Check if the content correspond to a valid ipv4 or ipv6 address
+        """
         valid = False
 
         try:
