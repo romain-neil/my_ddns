@@ -1,4 +1,5 @@
 # my_ddns
+
 Open Source DDNS, with connectors
 
 ## Requirements
@@ -8,6 +9,9 @@ Open Source DDNS, with connectors
 
 ## Installation
 
+### General use case
+
+The program use python 3, and the dependencies have to be installed manually in custom environments
 Use pip and the requirements.txt file
 
 ## Usage
