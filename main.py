@@ -1,4 +1,3 @@
-import json
 import os.path
 import time
 import sys
@@ -48,6 +47,8 @@ def main():
     # Tableau de la liste des ip à mettre à jour
     ip_to_update_list: list = []
 
+    should_update_dns = False
+
     while True:
         last_ip = get_public_ip()
         last_ipv6 = get_public_ipv6()
@@ -55,20 +56,23 @@ def main():
         if last_ip != current_ip:
             ip_to_update_list.append(last_ip)
             current_ip = last_ip
+            should_update_dns = True
             info(f"Public ip is no longer anymore {current_ip}, now it's {last_ip}")
 
         if last_ipv6 != current_ipv6:
             ip_to_update_list.append(last_ipv6)
             current_ipv6 = last_ipv6
+            should_update_dns = True
             info(f"Public ipv6 is no longer anymore {current_ipv6}, now it's {last_ipv6}")
 
-        if isinstance(domain, list):
-            for d in domain:
+        if should_update_dns:
+            if isinstance(domain, list):
+                for d in domain:
+                    for ip in ip_to_update_list:
+                        connector.update_dns(d, ip)
+            else:
                 for ip in ip_to_update_list:
-                    connector.update_dns(d, ip)
-        else:
-            for ip in ip_to_update_list:
-                connector.update_dns(domain, ip)
+                    connector.update_dns(domain, ip)
 
         time.sleep(300)
 
