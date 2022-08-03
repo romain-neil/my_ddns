@@ -24,6 +24,6 @@ Here a PowerDNS command exemple:
 
 The script will automatically check each 300s (5min) for ip update
 
-Note: for the moment, only mail in a box is supported
+## Compatibility
 
-Tested with MIAB v0.44
+You will find [here](compatibility.md) the basic compatibility list, with a little part of roadmap
