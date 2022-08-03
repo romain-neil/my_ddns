@@ -4,11 +4,12 @@ import sys
 
 from connector.MailInABoxConnector import MailInABoxConnector
 from connector.PowerDnsConnector import PowerDnsConnector
-from util.text import get_public_ip
+from util.text import get_public_ip, get_public_ipv6, info
 
 
 def main():
     current_ip = ""
+    current_ipv6 = ""
     domain = None
 
     # Parse parameters
@@ -42,19 +43,30 @@ def main():
 
     connector.set_instance(instance_url)
 
+    # Tableau de la liste des ip à mettre à jour
+    ip_to_update_list: list = []
+
     while True:
         last_ip = get_public_ip()
+        last_ipv6 = get_public_ipv6()
 
         if last_ip != current_ip:
-            print("Public ip is no longer anymore {0}, now it's {1}".format(current_ip, last_ip))
-
+            ip_to_update_list.append(last_ip)
             current_ip = last_ip
+            info(f"Public ip is no longer anymore {current_ip}, now it's {last_ip}")
 
-            if isinstance(domain, list):
-                for d in domain:
-                    connector.update_dns(d, current_ip)
-            else:
-                connector.update_dns(domain, current_ip)
+        if last_ipv6 != current_ipv6:
+            ip_to_update_list.append(last_ipv6)
+            current_ipv6 = last_ipv6
+            info(f"Public ipv6 is no longer anymore {current_ipv6}, now it's {last_ipv6}")
+
+        if isinstance(domain, list):
+            for d in domain:
+                for ip in ip_to_update_list:
+                    connector.update_dns(d, ip)
+        else:
+            for ip in ip_to_update_list:
+                connector.update_dns(domain, ip)
 
         time.sleep(300)
 
