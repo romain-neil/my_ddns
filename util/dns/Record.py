@@ -23,6 +23,11 @@ class Record:
     """
 
     def __init__(self, content: str, record_type: RecordType = RecordType.DEFAULT, ttl: int = 86400):
+        """
+        Initialize a record with the given parameters.
+        By default, the record type is not valid, as it has to be verified by the programmer.
+
+        """
         self.record_type = record_type
         self.ttl = ttl
         self.content = content
