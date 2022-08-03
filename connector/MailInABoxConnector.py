@@ -1,7 +1,7 @@
 import requests
 
 from connector.AbstractConnector import AbstractConnector
-from util import success, error
+from util.text import success, error
 
 
 class MailInABoxConnector(AbstractConnector):
