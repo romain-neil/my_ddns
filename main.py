@@ -1,3 +1,4 @@
+import json
 import os.path
 import time
 import sys
@@ -23,28 +24,26 @@ def parse_params() -> dict:
 def main():
     current_ip = ""
     current_ipv6 = ""
-    domain = None
 
     parameters = parse_params()
 
     # Set connector independant vars
-    domain_or_filename = parameters.get('domain')
+    domain = parameters.get('domain')
+    file = parameters.get('file')
 
     # Check if domain parameter is a filename
-    if os.path.exists('./' + domain_or_filename):
-        domain = []
+    if domain is None and file is not None:
+        if os.path.exists('./' + file):
+            domain = []
 
-        with open('./' + domain_or_filename) as file:
-            domain.append(line.rstrip() for line in file)
-
-    else:
-        domain = domain_or_filename
+            with open('./' + file) as file:
+                domain.append(line.rstrip() for line in file)
 
     connector = PowerDnsConnector()
 
     # For each parameter, set it in the connector
     for param in parameters:
-        connector.set_optional_parameter(param[0], param[1])
+        connector.set_optional_parameter(param, parameters.get(param))
 
     # Tableau de la liste des ip à mettre à jour
     ip_to_update_list: list = []
@@ -69,7 +68,7 @@ def main():
                     connector.update_dns(d, ip)
         else:
             for ip in ip_to_update_list:
-                connector.update_dns(domain_or_filename, ip)
+                connector.update_dns(domain, ip)
 
         time.sleep(300)
 

@@ -23,7 +23,7 @@ class PowerDnsConnector(AbstractConnector):
 
     def get_optionals_parameters(self):
         return [
-            'api_key',
+            'api-key',
             'domain',
             'zone'
         ]
