@@ -20,14 +20,17 @@ class BGColors:
     UNDERLINE = '\033[4m'
 
 
-def warn(text):
+def info(text: str):
+    print(f"{BGColors.OKBLUE}{text}{BGColors.ENDC}")
+
+
+def warn(text: str):
     print(f"{BGColors.WARNING}{text}{BGColors.ENDC}")
 
 
-def error(text):
+def error(text: str):
     print(f"{BGColors.FAIL}{text}{BGColors.ENDC}")
 
 
-def success(text):
+def success(text: str):
     print(f"{BGColors.OKGREEN}{text}{BGColors.ENDC}")
-
