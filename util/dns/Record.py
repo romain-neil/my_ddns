@@ -55,9 +55,11 @@ class Record:
     def get_ip(self) -> Union[ipaddress.IPv4Address, ipaddress.IPv6Address]:
         return ipaddress.ip_address(self.content)
 
-    def get_record_type(self):
+    def get_record_type(self) -> RecordType:
         """
         Return the record type corresponding to value passed in constructor (A, AAAA or CNAME)
+
+        TODO: check for other types (NS,PTR, ...)
         """
         try:
             ipaddress.IPv4Address(self.content)
