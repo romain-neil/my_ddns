@@ -25,17 +25,10 @@ def main():
     current_ipv6 = ""
     domain = None
 
-    # Parse parameters
-    domain_or_filename = sys.argv[1]
-    instance_url = sys.argv[2]
+    parameters = parse_params()
 
-    username = sys.argv[3]
-    password = sys.argv[4]
-
-    # TODO: parse parameters (--api-key=... --user=... etc)
-    api_key = ''
-    zone = ''
-    user = ''
+    # Set connector independant vars
+    domain_or_filename = parameters.get('domain')
 
     # Check if domain parameter is a filename
     if os.path.exists('./' + domain_or_filename):
@@ -49,12 +42,9 @@ def main():
 
     connector = PowerDnsConnector()
 
-    # Set optionals parameters for powerdns connector
-    connector.set_optional_parameter('api_key', api_key)
-    connector.set_optional_parameter('zone', zone)
-    connector.set_optional_parameter('user', user)
-
-    connector.set_instance(instance_url)
+    # For each parameter, set it in the connector
+    for param in parameters:
+        connector.set_optional_parameter(param[0], param[1])
 
     # Tableau de la liste des ip à mettre à jour
     ip_to_update_list: list = []
@@ -79,7 +69,7 @@ def main():
                     connector.update_dns(d, ip)
         else:
             for ip in ip_to_update_list:
-                connector.update_dns(domain, ip)
+                connector.update_dns(domain_or_filename, ip)
 
         time.sleep(300)
 
