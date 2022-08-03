@@ -74,6 +74,8 @@ def main():
                 for ip in ip_to_update_list:
                     connector.update_dns(domain, ip)
 
+            should_update_dns = False
+
         time.sleep(300)
 
 
