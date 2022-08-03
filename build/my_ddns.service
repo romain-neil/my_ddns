@@ -1,0 +1,20 @@
+[Unit]
+Description=Custom Dynamic DNS Serivce
+After=network-online.target
+
+[Service]
+Type=simple
+
+User=changeme
+Group=changeme
+UMask=007
+
+ExecStart=python3 /etc/my_ddns/main.py
+
+Restart=on-failure
+
+# Configures the time to wait before service is stopped forcefully.
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
