@@ -14,17 +14,22 @@ class MailInABoxConnector(AbstractConnector):
         self.password = None
         self.username = None
 
-    def auth(self, username, password):
-        self.username = username
-        self.password = password
+        self.params = {}
 
-    def set_instance(self, url):
-        self.instance_url = url
+    def get_optionals_parameters(self) -> list[str]:
+        return [
+            'username',
+            'password',
+            'instance-url'
+        ]
+
+    def set_optional_parameter(self, param_name: str, param_value: str):
+        self.params[param_name] = param_value
 
     def update_dns(self, domain, ip):
         r = requests.put(
-            url="https://{0}/admin/dns/custom/{1}".format(self.instance_url, domain),
-            auth=(self.username, self.password)
+            url=f"https://{self.params.get('password')}/admin/dns/custom/{domain}",
+            auth=(self.params.get('username'), self.params.get('password'))
         )
 
         if 200 <= r.status_code < 300:

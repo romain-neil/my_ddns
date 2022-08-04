@@ -51,12 +51,6 @@ class PowerDnsConnector(AbstractConnector):
                 }]
         })
 
-    def auth(self, username, password):
-        pass
-
-    def set_instance(self, url):
-        self.instance_url = url
-
     def update_dns(self, domain, ip):
         record = Record(str(ip))
         record.set_ip_record_type()
