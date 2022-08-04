@@ -22,29 +22,6 @@ class AbstractConnector(ABC):
         pass
 
     @abstractmethod
-    def auth(self, username: str, password: str):
-        """
-        Authenticate to the service
-
-        @deprecated
-
-        :param username:
-        :param password:
-        :return:
-        """
-        pass
-
-    @abstractmethod
-    def set_instance(self, url: str):
-        """
-        Set the instance url
-
-        @deprecated
-
-        """
-        pass
-
-    @abstractmethod
     def update_dns(self, domain: str, ip: str):
         """Update the dns ip to the service"""
         pass
