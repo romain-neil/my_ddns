@@ -48,18 +48,29 @@ def main():
     ip_to_update_list: list = []
 
     should_update_dns = False
+    
+    should_update_ipv4 = True
+    should_update_ipv6 = True
+
+    only_update = parameters.get('only-update')
+    if only_update is not None:
+        #  --only-update=ipv4 or ipv6
+        if only_update == 'ipv4':
+            should_update_ipv6 = False
+        else:
+            should_update_ipv4 = False
 
     while True:
         last_ip = get_public_ip()
         last_ipv6 = get_public_ipv6()
 
-        if last_ip != current_ip:
+        if last_ip != current_ip and should_update_ipv4:
             ip_to_update_list.append(last_ip)
             current_ip = last_ip
             should_update_dns = True
             info(f"Public ip is no longer anymore {current_ip}, now it's {last_ip}")
 
-        if last_ipv6 != current_ipv6:
+        if last_ipv6 != current_ipv6 and should_update_ipv6:
             ip_to_update_list.append(last_ipv6)
             current_ipv6 = last_ipv6
             should_update_dns = True
