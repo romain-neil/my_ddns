@@ -2,20 +2,24 @@ import os.path
 import time
 import sys
 
+from typing import List
+
 from connector.MailInABoxConnector import MailInABoxConnector
 from connector.PowerDnsConnector import PowerDnsConnector
 from util.text import get_public_ip, get_public_ipv6, info
 
 
-def parse_params() -> dict:
+def parse_params(param_list: List[str]) -> dict:
     parsed_params_list = {}
 
-    for p in sys.argv:
+    for p in param_list:
+        if not p.__contains__('='):
+            continue
         if p.startswith('--'):
             p = p.removeprefix('--')
-            param: list[str] = p.split('=')
 
-            parsed_params_list[param[0]] = param[1]
+        param: List[str] = p.split('=')
+        parsed_params_list[str(param[0])] = str(param[1])
 
     return parsed_params_list
 
@@ -24,11 +28,22 @@ def main():
     current_ip = ""
     current_ipv6 = ""
 
-    parameters = parse_params()
+    parameters = {}
+
+    if len(sys.argv) > 1:
+        parameters = parse_params(sys.argv)
+    else:
+        # Parameters are stored in a config file
+        params = []
+        with open('./config.txt') as file:
+            for line in file:
+                params.append(line.rstrip())
+
+        parameters = parse_params(params)
 
     # Set connector independant vars
-    domain = parameters.get('domain')
-    file = parameters.get('file')
+    domain = str(parameters.get('domain'))
+    file = str(parameters.get('file'))
 
     # Check if domain parameter is a filename
     if domain is None and file is not None:
