@@ -9,15 +9,15 @@ from connector.PowerDnsConnector import PowerDnsConnector
 from util.text import get_public_ip, get_public_ipv6, info
 
 
-def parse_params() -> dict:
+def parse_params(param_list: List[str]) -> dict:
     parsed_params_list = {}
 
-    for p in sys.argv:
+    for p in param_list:
         if p.startswith('--'):
             p = p.removeprefix('--')
-            param: List[str] = p.split('=')
 
-            parsed_params_list[param[0]] = param[1]
+        param: List[str] = p.split('=')
+        parsed_params_list[param[0]] = param[1]
 
     return parsed_params_list
 
@@ -26,7 +26,18 @@ def main():
     current_ip = ""
     current_ipv6 = ""
 
-    parameters = parse_params()
+    parameters = {}
+
+    if len(sys.argv) > 1:
+        parameters = parse_params(sys.argv)
+    else:
+        # Parameters are stored in a config file
+        params = []
+        with open('./config.txt') as file:
+            for line in file:
+                params.append(line.rstrip())
+
+        parameters = parse_params(params)
 
     # Set connector independant vars
     domain = str(parameters.get('domain'))
