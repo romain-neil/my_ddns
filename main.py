@@ -27,8 +27,8 @@ def main():
     parameters = parse_params()
 
     # Set connector independant vars
-    domain = parameters.get('domain')
-    file = parameters.get('file')
+    domain = str(parameters.get('domain'))
+    file = str(parameters.get('file'))
 
     # Check if domain parameter is a filename
     if domain is None and file is not None:
