@@ -2,6 +2,8 @@ import os.path
 import time
 import sys
 
+from typing import List
+
 from connector.MailInABoxConnector import MailInABoxConnector
 from connector.PowerDnsConnector import PowerDnsConnector
 from util.text import get_public_ip, get_public_ipv6, info
@@ -13,7 +15,7 @@ def parse_params() -> dict:
     for p in sys.argv:
         if p.startswith('--'):
             p = p.removeprefix('--')
-            param: list[str] = p.split('=')
+            param: List[str] = p.split('=')
 
             parsed_params_list[param[0]] = param[1]
 
