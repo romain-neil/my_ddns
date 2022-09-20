@@ -13,11 +13,13 @@ def parse_params(param_list: List[str]) -> dict:
     parsed_params_list = {}
 
     for p in param_list:
+        if not p.__contains__('='):
+            continue
         if p.startswith('--'):
             p = p.removeprefix('--')
 
         param: List[str] = p.split('=')
-        parsed_params_list[param[0]] = param[1]
+        parsed_params_list[str(param[0])] = str(param[1])
 
     return parsed_params_list
 
