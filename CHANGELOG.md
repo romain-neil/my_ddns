@@ -5,6 +5,12 @@
 ### ADDED
 - Cloudflare connector #11
 
+### CHANGED
+- Match connector type
+
+### FIXED
+- Check required connector's parameters
+
 # [2.1.1] - 2023-12-18
 ### CHANGED
 - Make dependabot respect git flow
