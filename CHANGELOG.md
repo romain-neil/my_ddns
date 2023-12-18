@@ -2,6 +2,10 @@
 
 ## UNRELEASED
 
+# [2.1.1] - 2023-12-18
+### CHANGED
+- Make dependabot respect git flow
+
 # [2.1.0] - 2023-12-18
 ### ADDED
 - Add basic dependabot conf
