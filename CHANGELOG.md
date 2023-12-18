@@ -2,6 +2,9 @@
 
 ## UNRELEASED
 
+### ADDED
+- Cloudflare connector #11
+
 # [2.0.1] - 2023-12-18
 ### ADDED
 - Add changelog file 
