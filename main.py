@@ -55,6 +55,11 @@ def main():
 
     connector = PowerDnsConnector()
 
+    required_parameters = connector.get_optionals_parameters()
+    for parameter in required_parameters:
+        if parameters.get(parameter) is None:
+            raise f"Required parameter {parameter} is missing"
+
     # For each parameter, set it in the connector
     for param in parameters:
         connector.set_optional_parameter(param, parameters.get(param))
