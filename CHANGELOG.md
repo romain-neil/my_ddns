@@ -2,6 +2,9 @@
 
 ## UNRELEASED
 
+### ADDED
+- Cloudflare connector #11
+
 # [2.1.1] - 2023-12-18
 ### CHANGED
 - Make dependabot respect git flow
