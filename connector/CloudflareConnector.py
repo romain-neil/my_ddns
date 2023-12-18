@@ -22,6 +22,7 @@ class CloudflareConnector(AbstractConnector):
     def get_optionals_parameters(self) -> list[str]:
         return [
             'has_api_key',
+            'auth_param'
             'domain',
             'ttl',
             'proxied'
@@ -37,7 +38,7 @@ class CloudflareConnector(AbstractConnector):
             auth_header = 'X-Api-Key'
 
         return {
-            # auth_header: self.params.
+            auth_header: self.params.get('auth_param')
         }
 
     def build_params(self, domain: str, record: Record) -> str:
