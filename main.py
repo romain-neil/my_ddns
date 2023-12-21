@@ -4,6 +4,7 @@ import sys
 
 from typing import List
 
+from connector.CloudflareConnector import CloudflareConnector
 from connector.MailInABoxConnector import MailInABoxConnector
 from connector.PowerDnsConnector import PowerDnsConnector
 from util.text import get_public_ip, get_public_ipv6, info
@@ -53,7 +54,22 @@ def main():
             with open('./' + file) as file:
                 domain.append(line.rstrip() for line in file)
 
-    connector = PowerDnsConnector()
+    # Check requested connector
+    connector_type = parameters.get('type')
+    match connector_type:
+        case 'power_dns':
+            connector = PowerDnsConnector()
+        case 'miab':
+            connector = MailInABoxConnector()
+        case 'cloudflare':
+            connector = CloudflareConnector()
+        case _:
+            raise Exception('Unknown connector type')
+
+    required_parameters = connector.get_optionals_parameters()
+    for parameter in required_parameters:
+        if parameters.get(parameter) is None:
+            raise f"Required parameter {parameter} is missing"
 
     # For each parameter, set it in the connector
     for param in parameters:
