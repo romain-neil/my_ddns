@@ -53,7 +53,6 @@ class PowerDnsConnector(AbstractConnector):
 
     def update_dns(self, domain, ip):
         record = Record(str(ip))
-        record.set_ip_record_type()
 
         data = self.build_params(domain, record)
 

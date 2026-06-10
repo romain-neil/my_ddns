@@ -28,14 +28,9 @@ class Record:
         By default, the record type is not valid, as it has to be verified by the programmer.
 
         """
-        self.record_type = self.get_record_type()
         self.ttl = ttl
         self.content = content
 
-    def set_ip_record_type(self):
-        """
-        Set the record type according to what is the content (ipv4, ipv6 or cname)
-        """
         self.record_type = self.get_record_type()
 
     def is_ip(self) -> bool:
