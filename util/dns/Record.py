@@ -28,7 +28,6 @@ class Record:
         By default, the record type is not valid, as it has to be verified by the programmer.
 
         """
-        self.record_type = self.get_record_type()
         self.ttl = ttl
         self.content = content
 
